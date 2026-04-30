@@ -1,103 +1,81 @@
-GoldBetAdvisor
+🥇 GoldBetAdvisor
 
-GoldBetAdvisor is a command-line tool that analyzes real-time gold market data using your trading strategies and compares it against Polymarket prediction markets.
+A command-line tool that analyzes real-time gold market data using your trading strategies and compares it with Polymarket prediction markets.
 
-It helps you decide whether a market is worth betting on — and if so, which side aligns with your strategy.
+It helps you decide:
 
-⚠️ This tool provides analysis only. It does NOT execute trades or place bets.
+Whether a bet is worth taking
+Which side (YES / NO) aligns with your strategy
+
+⚠️ Analysis only — this tool does NOT place trades.
 
 🚀 Quick Start
 
 Run the script with a Polymarket URL:
 
-python filename.py "POLYMARKET_EVENT_OR_MARKET_URL"
+python GoldBetAdvisor.py "POLYMARKET_URL"                                            
+
 ✅ Example
 python GoldBetAdvisor.py "https://polymarket.com/event/gc-hit-jun-2026?marketSlug=..."
 
-or:
+or
+
+
+
 
 python GoldBetAdvisor.py "https://polymarket.com/event/gc-hit-jun-2026"
+
+
+
+
+
 ⚙️ Command-Line Options
-Option	Description	Default
-url	Polymarket event or market URL	Required
---strategy	Strategy to use: trend or blackbox	trend
---window	Lookback window (blackbox only)	20
---symbol	Gold symbol (Yahoo Finance)	XAUUSD=X
---interval	Candle timeframe (1m, 5m, 1h, etc.)	5m
---range	Historical data range	30d
---fresh-bars	How recent a signal must be	3
---watch	Auto-refresh interval (seconds)	0 (off)
-🧠 Strategies Explained
+--strategy     Choose strategy: trend | blackbox
+--window       Lookback window (blackbox only)
+--symbol       Gold symbol (default: XAUUSD=X)
+--interval     Candle timeframe (default: 5m)
+--range        Data range (default: 30d)
+--fresh-bars   Signal freshness threshold
+--watch        Auto-refresh interval (seconds)
+🧠 Strategies
 🔹 Trend Confirmation (Default)
 
-A structured trend-following system using:
+Uses:
 
-📈 EMA 20 / 50 / 200
-⚡ RSI (14) momentum filter
-🔼 Breakout confirmation
-
-Bullish signal requires:
-
-Price above EMA 200 (long-term strength)
-EMA 20 > EMA 50 (short-term trend)
-RSI between 50–72 (healthy momentum)
-Break above previous candle high
-Recent pullback to EMA 20
-🔹 Blackbox Strategy
-
-Your custom price-action logic:
-
-🚀 Breakout detection
-🎯 Trap identification
-🔁 Re-cross confirmation
-
-Designed to catch:
-
-Fake breakouts
-Smart-money traps
-Re-entry opportunities
-📊 What the Script Outputs
-
-For every run, you’ll see:
-
-🟡 Market Data
-Latest gold price
-Candle timestamp
-Resistance levels
-📉 Indicators
 EMA 20 / 50 / 200
 RSI (14)
-🧭 Strategy Status
-Current state (SEARCHING / WAITING / BULLISH, etc.)
-Signal price (if any)
-Whether the signal is fresh
-🎯 Market Analysis
+Breakout confirmation
 
-Each Polymarket market is classified as:
+✔ Best for structured trend-following setups
 
-HIGH (price expected to go above target)
-LOW (price expected to stay below target)
-💡 Betting Advice Logic
-Situation	Output
-Bullish signal + HIGH market	✅ CONSIDER YES
-Bullish signal + LOW market	❌ CONSIDER NO
-No fresh signal	⛔ NO BET
-🔄 Live Monitoring Mode
+🔹 Blackbox Strategy
 
-Continuously refresh data:
+Uses:
+
+Breakout
+Trap
+Re-cross logic
+
+✔ Best for catching fakeouts and smart-money moves
+
+📊 Output
+
+The script prints:
+
+📈 Gold price + indicators
+🧭 Strategy state
+🔔 Signal freshness
+🎯 Market classification (HIGH / LOW)
+💡 Betting advice:
+✅ CONSIDER YES
+❌ CONSIDER NO
+⛔ NO BET
+🔄 Live Mode
+
+Run continuously:
 
 python GoldBetAdvisor.py "URL" --watch 60
-
-⏱ Updates every 60 seconds.
-
-⚠️ Important Disclaimer
-This tool is for research and analysis only
-It does not guarantee profit
-Financial markets are unpredictable
-Always test strategies before using real money
-🛠️ Future Improvements (Ideas)
-Multi-timeframe confirmation
-Bearish strategy support
-GUI dashboard
-Backtesting module
-Alert system (Telegram/Discord)
+⚠️ Disclaimer
+Not financial advice
+No guarantee of profit
+Use at your own risk
